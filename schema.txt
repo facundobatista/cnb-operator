@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Manifest",
+    "definitions": {
+        "Manifest": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string",
+                    "default": ""
+                },
+                "summary": {
+                    "type": "string",
+                    "default": ""
+                },
+                "requires": {
+                    "$ref": "#/definitions/RequiredRelations"
+                },
+                "environment": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Environment"
+                    }
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/File"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "requires"
+            ],
+            "title": "Manifest"
+        },
+        "Environment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "template": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "template"
+            ],
+            "title": "Environment"
+        },
+        "File": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "template": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "template"
+            ],
+            "title": "File"
+        },
+        "RequiredRelations": {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {
+                    "$ref": "#/definitions/Relation"
+                }
+            },
+            "title": "RequiredRelations"
+        },
+        "Relation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "interface": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "interface"
+            ],
+            "title": "Relation"
+        }
+    }
+}
